@@ -2,6 +2,8 @@ import './App.css';
 import axios from "axios";
 import { useState,useEffect } from 'react';
 import LandingPage from './landingPage/landingPage';
+import LoginPage from './loginPage/loginPage';
+import RegisterPage from "./registerPage/registerPage"
 
 function App() {
 
@@ -23,6 +25,8 @@ useEffect(()=>{
   return (
     <div className="App">
       <LandingPage/>
+      {/* <LoginPage/> */}
+      <RegisterPage/>
       {mySpaceData.map((spaceData)=>
       <div key={spaceData.id}>
         {spaceData.last_update}
