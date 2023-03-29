@@ -1,6 +1,7 @@
 import './App.css';
 import axios from "axios";
 import { useState,useEffect } from 'react';
+import LandingPage from './landingPage/landingPage';
 
 function App() {
 
@@ -21,6 +22,7 @@ useEffect(()=>{
 },[])
   return (
     <div className="App">
+      <LandingPage/>
       {mySpaceData.map((spaceData)=>
       <div key={spaceData.id}>
         {spaceData.last_update}
