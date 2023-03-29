@@ -11,7 +11,9 @@ const LandingPage=()=>{
         <div className="lanPg-desc"><b>Space Exploration Technologies Corp.</b> is an American spacecraft manufacturer, 
         launcher, and a satellite communications corporation 
         headquartered in Hawthorne, California.</div>
+        <button>Login</button>
       </div>
+      
     </div>
     <div className="lanPg-right">
       <div className="lanPg-bg"></div>
