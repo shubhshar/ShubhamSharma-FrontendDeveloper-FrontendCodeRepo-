@@ -1,38 +1,14 @@
-import './App.css';
-import axios from "axios";
-import { useState,useEffect } from 'react';
-import LandingPage from './landingPage/landingPage';
-import LoginPage from './loginPage/loginPage';
-import RegisterPage from "./registerPage/registerPage"
+import "./App.css";
+
+import { useAuth0 } from "@auth0/auth0-react";
+import LandingPage from "./landingPage/landingPage";
+import HomeP from "./homePage/homeP";
 
 function App() {
+  const { isAuthenticated } = useAuth0();
 
-const [mySpaceData, setMySpaceData]=useState([])
-
-useEffect(()=>{
-  const getData =async()=>{
-    try{
-      const response=await axios.get(`http://localhost:5000/mySpaceXData`)
-      setMySpaceData(response.data)
-      console.log(response.data)
-    }
-    catch(error){
-      setMySpaceData(null)
-    }
-  }
-  getData()
-},[])
   return (
-    <div className="App">
-      <LandingPage/>
-      {/* <LoginPage/> */}
-      <RegisterPage/>
-      {mySpaceData.map((spaceData)=>
-      <div key={spaceData.id}>
-        {spaceData.last_update}
-      </div>
-      )}
-    </div>
+    <div className="App">{isAuthenticated ? <HomeP /> : <LandingPage />}</div>
   );
 }
 

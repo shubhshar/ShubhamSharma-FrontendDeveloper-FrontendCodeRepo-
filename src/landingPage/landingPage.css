@@ -42,7 +42,6 @@
 }
 
 .lanPg-bg {
-  clip-path: polygon(100% 0%, 100% 51%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
   clip-path: ellipse(25% 40% at 50% 50%);
   background-color: #0c5272;
   width: 100%;
@@ -73,6 +72,10 @@ button {
   font-size: 15px;
 }
 
+.linkClass {
+  text-decoration: none;
+
+}
 
 @media screen and (max-width: 1224px) {
   .lanPg {

@@ -1,9 +1,10 @@
 import "./landingPage.css";
 import spaceCap from "../images/sp2.png";
-import { BrowserRouter as Router, Routes, Link, Route } from "react-router-dom";
-import LoginPage from "../loginPage/loginPage";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const LandingPage = () => {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+
   return (
     <>
       <div className="lanPg">
@@ -12,21 +13,21 @@ const LandingPage = () => {
             <div className="lanPg-intro"> Welcome to </div>
             <div className="lanPg-name"> Space X </div>
             <div className="lanPg-desc">
-              
-                <Router>
-              
-                <Link to ="/">Space Exploration Technologies Corp.</Link>is an American
-              spacecraft manufacturer, launcher, and a satellite communications
-              corporation headquartered in Hawthorne, California.
-              <button><Link to="/login">
-                Login
-              </Link></button>
-              <Routes>
-                
-                <Route path="/login" element={<LoginPage/>}/>
-              </Routes>
-            </Router>
+              Space Exploration Technologies Corp. is an American spacecraft
+              manufacturer, launcher, and a satellite communications corporation
+              headquartered in Hawthorne, California.
             </div>
+            {isAuthenticated ? (
+              <button
+                onClick={() =>
+                  logout({ logoutParams: { returnTo: window.location.origin } })
+                }
+              >
+                Log Out
+              </button>
+            ) : (
+              <button onClick={() => loginWithRedirect()}>Login</button>
+            )}
           </div>
         </div>
         <div className="lanPg-right">
