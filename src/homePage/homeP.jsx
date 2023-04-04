@@ -41,7 +41,6 @@ const HomeP = () => {
       return datas;
     }
   });
-  console.log(filterData);
 
   const numberOfPages = Math.ceil(filterData.length / dataPerPage);
   const pagesToshow = [...Array(numberOfPages + 1).keys()].slice(1);
