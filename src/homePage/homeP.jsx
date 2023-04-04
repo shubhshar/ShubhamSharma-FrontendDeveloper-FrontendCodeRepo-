@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const HomeP = () => {
   const { logout } = useAuth0();
   const [mySpaceData, setMySpaceData] = useState([]);
-  const dataPerPage = 4;
+  const dataPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
@@ -21,43 +21,64 @@ const HomeP = () => {
     getData();
   }, []);
 
-  const numberOfPages = Math.round(mySpaceData.length / dataPerPage);
+  const numberOfPages = Math.ceil(mySpaceData.length / dataPerPage);
   const pagesToshow = [...Array(numberOfPages + 1).keys()].slice(1);
   const indexOfLastPage = currentPage * dataPerPage;
   const indexOfFirstPage = indexOfLastPage - dataPerPage;
   const visibleData = mySpaceData.slice(indexOfFirstPage, indexOfLastPage);
 
-  const prevHandler =()=>{
-    if(currentPage !== 1){
-      setCurrentPage(currentPage-1)
+  const prevHandler = () => {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
     }
-  }
-  const nextHandler =()=>{
-    if(currentPage !== numberOfPages){
-      setCurrentPage(currentPage+1)
+  };
+  const nextHandler = () => {
+    if (currentPage !== numberOfPages) {
+      setCurrentPage(currentPage + 1);
     }
-  }
-  
+  };
+
   return (
-    <div>
-      {visibleData.map((spaceData) => (
-        <p key={spaceData.id}>{spaceData.last_update}</p>
-      ))}
-      <p>
-      <span onClick={prevHandler}>Prev </span>
-        {pagesToshow.map((page) => (
-          <span key={page} onClick={()=>setCurrentPage(page)}>{`${page}   `}</span>
-        ))}{" "}
-         <span onClick={nextHandler}> Next</span>
-      </p>
-      <button
-        onClick={() =>
-          logout({ logoutParams: { returnTo: window.location.origin } })
-        }
-      >
-        Log Out
-      </button>
-    </div>
+    <>
+      <div className="container">
+        <div className="container-header">
+          <span
+            className="container-header-logout"
+            onClick={() =>
+              logout({ logoutParams: { returnTo: window.location.origin } })
+            }
+          >
+            Log Out
+          </span>
+        </div>
+        <div className="container-card">
+          {visibleData.map((spaceData) => (
+            <div className="conatiner-card-content" key={spaceData.id}>
+              <p>
+                <b>Last Update:</b> {spaceData.last_update}
+              </p>
+              <p>
+                <b>Status: </b> {spaceData.status}
+              </p>
+              <p>
+                <b>Type: </b> {spaceData.type}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p className="container-pagination">
+          <button onClick={prevHandler}>Prev </button>
+          {pagesToshow.map((page) => (
+            <span
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`${currentPage === page ? "active" : " "}`}
+            >{`${page}   `}</span>
+          ))}{" "}
+          <button onClick={nextHandler}> Next</button>
+        </p>
+      </div>
+    </>
   );
 };
 

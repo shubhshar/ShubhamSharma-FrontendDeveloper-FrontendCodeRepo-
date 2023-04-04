@@ -1,123 +1,76 @@
-.loginContainer {
-  display: flex;
-  height: 100vh;
-  background-color: beige;
-
-}
-
-.loginPg-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: 10%;
-
-}
-
-
-/* .lanPg-intro {
-  font-size: 45px;
-  font-weight: 300;
-}
-
-.lanPg-name {
-  font-size: 80px;
-}
-
-.lanPg-desc {
-  font-size: 20px;
-  margin-top: 20px;
-} */
-
-.loginPg-img {
-  width: 50%;
-  height: 50%;
-  object-fit: contain;
-  position: absolute;
-  margin-left: 10%;
-}
-
-
-.loginPg-right {
-  flex: 1;
+.container-header {
   position: relative;
-  margin-left: 10%;
+  height: 50px;
+  /* Set a height for the container */
 }
 
-.content {
-  margin-top: 20%;
-  max-width: 400px;
-  width: 100%;
+
+.container-header-logout {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #0c5272;
   background-color: #0c5272;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-
-.title {
+  border-radius: 8px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   color: beige;
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
 }
 
-.btn {
+.container-pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.container-pagination span {
+  padding: 5px;
+}
+
+.container-pagination button {
   width: auto;
   padding: 10px;
-  background-color: beige;
+}
+
+.active {
   color: #0c5272;
-  margin-bottom: 5px;
+  font-size: 25px;
 }
 
-.input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+.container-card {
+  display: flex;
+  transition: transform 0.2s;
+  position: relative;
+  border-radius: 10px;
+  margin: 0.35rem;
+  cursor: pointer;
+  min-width: 200px;
+  height: 300px;
+  z-index: 0;
 }
 
-
-.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-  padding-top: 10px;
-  color: beige;
+.conatiner-card-content:hover {
+  transform: scale(1.1);
+  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-input {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
+.conatiner-card-content {
+  display: inline-block;
+  background-color: beige;
   border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
+  border-radius: 10px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
 }
 
-.linkClass {
-  text-decoration: none;
-  color: beige;
-}
-
-.linkspan {
-  text-decoration: underline;
-}
-
-@media screen and (max-width: 1224px) {
-  .loginContainer {
-    flex-direction: column;
-  }
-
-  .content {
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-  }
-
-  .lanPg-name {
-    font-size: 35px;
-  }
+.conatiner-card-content b {
+  color: #0c5272;
 }
