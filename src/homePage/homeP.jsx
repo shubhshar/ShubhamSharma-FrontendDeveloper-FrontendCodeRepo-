@@ -20,15 +20,14 @@ const HomeP = () => {
         setMySpaceData(null);
       }
     };
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
     getData();
     
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
+  
 
   const numberOfPages = Math.ceil(mySpaceData.length / dataPerPage);
   const pagesToshow = [...Array(numberOfPages + 1).keys()].slice(1);
