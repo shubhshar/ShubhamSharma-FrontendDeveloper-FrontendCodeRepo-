@@ -52,7 +52,7 @@
   z-index: 0;
 }
 
-.conatiner-card-content:hover {
+.container-card-content:hover {
   transform: scale(1.1);
   z-index: 1000;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -60,7 +60,7 @@
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.conatiner-card-content {
+.container-card-content {
   display: inline-block;
   background-color: beige;
   border: 1px solid #ccc;
@@ -71,6 +71,6 @@
   width: 100%;
 }
 
-.conatiner-card-content b {
+.container-card-content b {
   color: #0c5272;
 }

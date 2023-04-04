@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./homeP.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const HomeP = () => {
   const { logout } = useAuth0();
   const [mySpaceData, setMySpaceData] = useState([]);
   const dataPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -19,6 +21,13 @@ const HomeP = () => {
       }
     };
     getData();
+    
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   const numberOfPages = Math.ceil(mySpaceData.length / dataPerPage);
@@ -51,21 +60,28 @@ const HomeP = () => {
             Log Out
           </span>
         </div>
-        <div className="container-card">
-          {visibleData.map((spaceData) => (
-            <div className="conatiner-card-content" key={spaceData.id}>
-              <p>
-                <b>Last Update:</b> {spaceData.last_update}
-              </p>
-              <p>
-                <b>Status: </b> {spaceData.status}
-              </p>
-              <p>
-                <b>Type: </b> {spaceData.type}
-              </p>
-            </div>
-          ))}
-        </div>
+        {isLoading ? (
+          <SkeletonTheme color="#0c5272" highlightColor="#0c5272">
+            <Skeleton height={300} duration={2} />
+          </SkeletonTheme>
+        ) : (
+          <div className="container-card">
+            {visibleData.map((spaceData) => (
+              <div className="container-card-content" key={spaceData.id}>
+                <p>
+                  <b>Last Update:</b> {spaceData.last_update}
+                </p>
+                <p>
+                  <b>Status: </b> {spaceData.status}
+                </p>
+                <p>
+                  <b>Type: </b> {spaceData.type}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+
         <p className="container-pagination">
           <button onClick={prevHandler}>Prev </button>
           {pagesToshow.map((page) => (
