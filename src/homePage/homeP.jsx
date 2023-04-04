@@ -11,6 +11,8 @@ const HomeP = () => {
   const dataPerPage = 7;
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterCriteria, setFilterCriteria] = useState("all");
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -26,11 +28,26 @@ const HomeP = () => {
     getData();
   }, []);
 
-  const numberOfPages = Math.ceil(mySpaceData.length / dataPerPage);
+  const filterData = mySpaceData.filter((datas) => {
+    if (filterCriteria === "retired") {
+      return datas.status === "retired";
+    } else if (filterCriteria === "active") {
+      return datas.status === "active";
+    } else if (filterCriteria === "destroyed") {
+      return datas.status === "destroyed";
+    } else if (filterCriteria === "unknown") {
+      return datas.status === "unknown";
+    } else {
+      return datas;
+    }
+  });
+  console.log(filterData);
+
+  const numberOfPages = Math.ceil(filterData.length / dataPerPage);
   const pagesToshow = [...Array(numberOfPages + 1).keys()].slice(1);
   const indexOfLastPage = currentPage * dataPerPage;
   const indexOfFirstPage = indexOfLastPage - dataPerPage;
-  const visibleData = mySpaceData.slice(indexOfFirstPage, indexOfLastPage);
+  const visibleData = filterData.slice(indexOfFirstPage, indexOfLastPage);
 
   const prevHandler = () => {
     if (currentPage !== 1) {
@@ -41,6 +58,11 @@ const HomeP = () => {
     if (currentPage !== numberOfPages) {
       setCurrentPage(currentPage + 1);
     }
+  };
+
+  const handleFilter = (e) => {
+    setFilterCriteria(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
@@ -61,13 +83,13 @@ const HomeP = () => {
           {visibleData.map((spaceData) => (
             <div className="container-card-content" key={spaceData.id}>
               {isLoading ? (
-                <SkeletonTheme color="#0c5272" highlightColor="#0c5272">
+                <SkeletonTheme color="beige" highlightColor="#a2d0e6">
                   <Skeleton height={250} duration={2} />
                 </SkeletonTheme>
               ) : (
                 <div className="cp">
                   <p>
-                    <b>Last Update:</b> {spaceData.last_update}
+                    <b> Last Update:</b> {spaceData.last_update}
                   </p>
                   <p>
                     <b>Status: </b> {spaceData.status}
@@ -92,6 +114,16 @@ const HomeP = () => {
           ))}{" "}
           <button onClick={nextHandler}> Next</button>
         </p>
+        <div className="container-filterClass">
+          <p>Filter by status &nbsp;</p>
+          <select name="Filter" onChange={handleFilter}>
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="retired">Retired</option>
+            <option value="destroyed">Destroyed</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
       </div>
     </>
   );
