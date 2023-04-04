@@ -24,10 +24,7 @@ const HomeP = () => {
       setIsLoading(false);
     }, 2000);
     getData();
-    
   }, []);
-
-  
 
   const numberOfPages = Math.ceil(mySpaceData.length / dataPerPage);
   const pagesToshow = [...Array(numberOfPages + 1).keys()].slice(1);
@@ -59,27 +56,30 @@ const HomeP = () => {
             Log Out
           </span>
         </div>
-        {isLoading ? (
-          <SkeletonTheme color="#0c5272" highlightColor="#0c5272">
-            <Skeleton height={300} duration={2} />
-          </SkeletonTheme>
-        ) : (
-          <div className="container-card">
-            {visibleData.map((spaceData) => (
-              <div className="container-card-content" key={spaceData.id}>
-                <p>
-                  <b>Last Update:</b> {spaceData.last_update}
-                </p>
-                <p>
-                  <b>Status: </b> {spaceData.status}
-                </p>
-                <p>
-                  <b>Type: </b> {spaceData.type}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+
+        <div className="container-card">
+          {visibleData.map((spaceData) => (
+            <div className="container-card-content" key={spaceData.id}>
+              {isLoading ? (
+                <SkeletonTheme color="#0c5272" highlightColor="#0c5272">
+                  <Skeleton height={250} duration={2} />
+                </SkeletonTheme>
+              ) : (
+                <div className="cp">
+                  <p>
+                    <b>Last Update:</b> {spaceData.last_update}
+                  </p>
+                  <p>
+                    <b>Status: </b> {spaceData.status}
+                  </p>
+                  <p>
+                    <b>Type: </b> {spaceData.type}
+                  </p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
 
         <p className="container-pagination">
           <button onClick={prevHandler}>Prev </button>
