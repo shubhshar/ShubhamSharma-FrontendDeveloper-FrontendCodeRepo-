@@ -89,11 +89,12 @@
 
   .container-card {
     display: inline;
-    flex-direction: column;
-    width: auto;
+
   }
 
   .container-header-logout {
     width: auto;
+    top: 5%;
+    right: 5%;
   }
 }
