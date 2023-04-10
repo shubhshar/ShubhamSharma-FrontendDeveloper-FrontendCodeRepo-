@@ -16,7 +16,7 @@ const HomeP = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`https://silly-nougat-3f9593.netlify.app/mySpaceXData`);
+        const response = await axios.get(`https://whimsical-cassata-0d2fb9.netlify.app/.netlify/functions/api/mySpaceXDaata`);
         setMySpaceData(response.data);
       } catch (error) {
         setMySpaceData(null);
