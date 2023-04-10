@@ -16,7 +16,7 @@ const HomeP = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/mySpaceXData`);
+        const response = await axios.get(`https://silly-nougat-3f9593.netlify.app/mySpaceXData`);
         setMySpaceData(response.data);
       } catch (error) {
         setMySpaceData(null);
